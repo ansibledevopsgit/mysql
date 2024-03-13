@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  db:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: asetco
+      MYSQL_USER: yaser
+      MYSQL_PASSWORD: 871132871
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql:rw
+      - ./my.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
+  adminer_container:
+    image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    ports:
+      - 8080:8080
+
+volumes:
+  db:
